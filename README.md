@@ -37,20 +37,28 @@ done < srr_accessions.txt
 
 
 # Download the fasta file
+'''
 wget https://ftp.ensembl.org/pub/release-113/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+'''
 
 # Unzip the file
+'''
 gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+'''
 
 # Rename it to reference.fasta
+'''
 mv Homo_sapiens.GRCh38.dna.primary_assembly.fa reference.fasta
+'''
 
 # STAR MAPPING
+'''
 STAR --runMode genomeGenerate \
   --genomeDir star_index \
   --genomeFastaFiles Homo_sapiens.GRCh38.dna.primary_assembly.fa \
   --sjdbGTFfile Homo_sapiens.GRCh38.113.gtf \
   --sjdbOverhang 100
+'''
 
 - Create a script called `star.bh`
 ```
