@@ -49,4 +49,20 @@ for R1 in "$FASTQ_DIR"/*_1.fastq; do
          --outSAMtype BAM SortedByCoordinate
 done
 ```
+# Check if you have subread environment
+```
+module load anaconda3
+conda env list
+```
+# Files will be in
 
+    star_output/SRRACCESSIONHEALTY_Aligned.sortedByCoord.out.bam
+    star_output/SRRACCESSIONHEALTY_Aligned.sortedByCoord.out.bam
+    star_output/SRRACCESSIONHEALTY_Aligned.sortedByCoord.out.bam
+    star_output/SRRACCESSIONHEALTY_Aligned.sortedByCoord.out.bam
+    star_output/SRRACCESSION_AD_Aligned.sortedByCoord.out.bam
+    star_output/SRRACCESSION_AD_Aligned.sortedByCoord.out.bam
+    star_output/SRRACCESSION_AD_Aligned.sortedByCoord.out.bam
+    star_output/SRRACCESSION_AD_Aligned.sortedByCoord.out.bam
+
+   
