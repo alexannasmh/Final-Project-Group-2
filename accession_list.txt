@@ -1,0 +1,13 @@
+# Accession list for Homo sapiens 
+
+Healthy samples:
+SRR16101430
+SRR16101431
+SRR16101432
+SRR16101433
+
+Alzheimer's samples:
+SRR16101435
+SRR16101436
+SRR16101437
+SRR16101438
