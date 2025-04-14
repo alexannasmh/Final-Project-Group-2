@@ -37,9 +37,8 @@ done < srr_accessions.txt
 
 
 # Download the fasta file
-'''
 wget https://ftp.ensembl.org/pub/release-113/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
-'''
+
 
 # Unzip the file
 '''
