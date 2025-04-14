@@ -33,6 +33,7 @@ OUTPUT_DIR="star_output"
 THREADS=8
 
 # Make output directory if it doesn't exist
+module load STAR
 mkdir -p "$OUTPUT_DIR"
 
 # Loop over all *_1.fastq files to get sample names
