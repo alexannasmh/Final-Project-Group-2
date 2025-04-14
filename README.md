@@ -47,6 +47,7 @@ gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 '''
 
 # Rename it to reference.fasta
+
 '''
 mv Homo_sapiens.GRCh38.dna.primary_assembly.fa reference.fasta
 '''
