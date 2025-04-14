@@ -18,8 +18,10 @@ SRR numbers - 8 sample size for project
 # NCBI Database: Public database where our SRR accessions were found. https://www.ncbi.nlm.nih.gov/sra 
 
 ## Downloading sequences
+```
 module load sra-toolkit
-
+```
+```
 #!/bin/bash
 module load anaconda3
 conda activate sra-env
@@ -29,6 +31,7 @@ while read -r SRR; do
   prefetch --max-size 100G $SRR
   fasterq-dump $SRR --split-files -O fastq_files/
 done < srr_accessions.txt
+```
 
 ## Download reference genome
 
