@@ -9,9 +9,43 @@ module load sra-toolkit
 ## Download reference genome
 # Download the fasta file
 wget https://ftp.ensembl.org/pub/release-113/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+- DONE!!! WOOHOO!
 
 # Unzip the file
 gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 
 # Rename it to reference.fasta
 mv Homo_sapiens.GRCh38.dna.primary_assembly.fa reference.fasta
+
+# STAR MAPPING
+- Create a script called `star.bh`
+```
+vi star.bh
+```
+- Type I to edit
+```
+#!/bin/bash
+
+# Set paths
+GENOME_DIR="star_index"
+FASTQ_DIR="fastq_files"
+OUTPUT_DIR="star_output"
+THREADS=8
+
+# Make output directory if it doesn't exist
+mkdir -p "$OUTPUT_DIR"
+
+# Loop over all *_1.fastq files to get sample names
+for R1 in "$FASTQ_DIR"/*_1.fastq; do
+    SAMPLE=$(basename "$R1" _1.fastq)
+    R2="$FASTQ_DIR/${SAMPLE}_2.fastq"
+
+    # Run STAR
+    STAR --genomeDir "$GENOME_DIR" \
+         --readFilesIn "$R1" "$R2" \
+         --outFileNamePrefix "${OUTPUT_DIR}/${SAMPLE}_" \
+         --runThreadN "$THREADS" \
+         --outSAMtype BAM SortedByCoordinate
+done
+```
+
