@@ -98,13 +98,16 @@ conda env list
 ```
 # Files will be in
 
-    star_output/SRRACCESSIONHEALTY_Aligned.sortedByCoord.out.bam
-    star_output/SRRACCESSIONHEALTY_Aligned.sortedByCoord.out.bam
-    star_output/SRRACCESSIONHEALTY_Aligned.sortedByCoord.out.bam
-    star_output/SRRACCESSIONHEALTY_Aligned.sortedByCoord.out.bam
-    star_output/SRRACCESSION_AD_Aligned.sortedByCoord.out.bam
-    star_output/SRRACCESSION_AD_Aligned.sortedByCoord.out.bam
-    star_output/SRRACCESSION_AD_Aligned.sortedByCoord.out.bam
-    star_output/SRRACCESSION_AD_Aligned.sortedByCoord.out.bam
+```
+featureCounts -T 8 -a annotation.gtf -o counts.txt \
+star_output/SRR16101430_Aligned.sortedByCoord.out.bam
+star_output/SRR16101431_Aligned.sortedByCoord.out.bam
+star_output/SRR16101432_Aligned.sortedByCoord.out.bam
+star_output/SRR16101433_Aligned.sortedByCoord.out.bam
+star_output/SRR16101435_Aligned.sortedByCoord.out.bam
+star_output/SRR16101436_Aligned.sortedByCoord.out.bam
+star_output/SRR16101437_Aligned.sortedByCoord.out.bam
+star_output/SRR16101438_Aligned.sortedByCoord.out.bam
+
 
    
