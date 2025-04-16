@@ -62,11 +62,22 @@ STAR --runMode genomeGenerate \
 
 - Create a script called `star.bh`
 ```
-vi star.bh
+vi star.slurm
 ```
 - Type I to edit
 ```
 #!/bin/bash
+#SBATCH --job-name=star_alzheim
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=16G
+#SBATCH --time=06:00:00
+#SBATCH --output=star_%A_%a.out
+#SBATCH --array=0-7
+#SBATCH --mail-user=aetaylo2@svsu.edu
+#SBATCH --mail-type=ALL
+
+# Load STAR module
+module load STAR
 
 # Set paths
 GENOME_DIR="star_index"
@@ -74,22 +85,26 @@ FASTQ_DIR="fastq_files"
 OUTPUT_DIR="star_output"
 THREADS=8
 
-# Make output directory if it doesn't exist
-module load STAR
+# Create output directory
 mkdir -p "$OUTPUT_DIR"
+mkdir -p logs
 
-# Loop over all *_1.fastq files to get sample names
-for R1 in "$FASTQ_DIR"/*_1.fastq; do
-    SAMPLE=$(basename "$R1" _1.fastq)
-    R2="$FASTQ_DIR/${SAMPLE}_2.fastq"
+# Get all sample names
+SAMPLES=($(ls ${FASTQ_DIR}/*_1.fastq | sed 's|.*/||' | sed 's/_1.fastq//' | sort))
 
-    # Run STAR
-    STAR --genomeDir "$GENOME_DIR" \
-         --readFilesIn "$R1" "$R2" \
-         --outFileNamePrefix "${OUTPUT_DIR}/${SAMPLE}_" \
-         --runThreadN "$THREADS" \
-         --outSAMtype BAM SortedByCoordinate
-done
+# Get current sample for this task
+SAMPLE=${SAMPLES[$SLURM_ARRAY_TASK_ID]}
+R1="${FASTQ_DIR}/${SAMPLE}_1.fastq"
+R2="${FASTQ_DIR}/${SAMPLE}_2.fastq"
+
+echo "Processing sample: $SAMPLE"
+
+# Run STAR
+STAR --genomeDir "$GENOME_DIR" \
+     --readFilesIn "$R1" "$R2" \
+     --outFileNamePrefix "${OUTPUT_DIR}/${SAMPLE}_" \
+     --runThreadN "$THREADS" \
+     --outSAMtype BAM SortedByCoordinate
 ```
 # Download annotation file
 ```
