@@ -191,6 +191,13 @@ ggplot(as.data.frame(res), aes(x = log2FoldChange, y = -log10(padj))) +
 
 /opt/packages/STAR/2.7.10b/STAR: line 26: 93377 Killed                  singularity exec $OPTIONS $DIRECTORY/singularity-$PACKAGE-$VERSION.sif /opt/STAR_2.7.10b/Linux_x86_64_static/$TOOL "$@"
 slurmstepd: error: Detected 1 oom-kill event(s) in StepId=30472752.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
-[ataylor2@bridges2-login012 Final-Project-Group-2]$ 
+
+Processing sample: SRR16101430
+	/opt/STAR_2.7.10b/Linux_x86_64_static/STAR --genomeDir star_index --readFilesIn fastq_files/SRR16101430_1.fastq fastq_files/SRR16101430_2.fastq --outFileNamePrefix star_output/SRR16101430_ --runThreadN 8 --outSAMtype BAM SortedByCoordinate
+	STAR version: 2.7.10b   compiled: 2022-11-01T09:53:26-04:00 :/home/dobin/data/STAR/STARcode/STAR.master/source
+Apr 16 11:42:14 ..... started STAR run
+Apr 16 11:42:14 ..... loading genome
+/opt/packages/STAR/2.7.10b/STAR: line 26: 63661 Killed                  singularity exec $OPTIONS $DIRECTORY/singularity-$PACKAGE-$VERSION.sif /opt/STAR_2.7.10b/Linux_x86_64_static/$TOOL "$@"
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=30472675.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
 
    
