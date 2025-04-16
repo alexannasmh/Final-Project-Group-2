@@ -91,6 +91,17 @@ for R1 in "$FASTQ_DIR"/*_1.fastq; do
          --outSAMtype BAM SortedByCoordinate
 done
 ```
+# Download annotation file
+```
+# Download the GTF file
+wget https://ftp.ensembl.org/pub/release-113/gtf/homo_sapiens/Homo_sapiens.GRCh38.113.gtf.gz
+
+# Unzip the GTF file
+gunzip Homo_sapiens.GRCh38.113.gtf.gz
+
+# Rename it to annotation.gtf
+mv Homo_sapiens.GRCh38.113.gtf annotation.gtf
+```
 # Check if you have subread environment
 ```
 module load anaconda3
