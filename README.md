@@ -188,4 +188,9 @@ ggplot(as.data.frame(res), aes(x = log2FoldChange, y = -log10(padj))) +
   theme_minimal()
 
 ```
+
+/opt/packages/STAR/2.7.10b/STAR: line 26: 93377 Killed                  singularity exec $OPTIONS $DIRECTORY/singularity-$PACKAGE-$VERSION.sif /opt/STAR_2.7.10b/Linux_x86_64_static/$TOOL "$@"
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=30472752.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
+[ataylor2@bridges2-login012 Final-Project-Group-2]$ 
+
    
