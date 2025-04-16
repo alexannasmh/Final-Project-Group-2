@@ -106,6 +106,10 @@ STAR --genomeDir "$GENOME_DIR" \
      --runThreadN "$THREADS" \
      --outSAMtype BAM SortedByCoordinate
 ```
+- Run script
+```
+sbatch star.slurm
+```
 # Download annotation file
 ```
 # Download the GTF file
@@ -134,6 +138,54 @@ star_output/SRR16101435_Aligned.sortedByCoord.out.bam
 star_output/SRR16101436_Aligned.sortedByCoord.out.bam
 star_output/SRR16101437_Aligned.sortedByCoord.out.bam
 star_output/SRR16101438_Aligned.sortedByCoord.out.bam
+```
+# Push the "counts.txt" to your repository
+```
+git add counts.txt
+git commit -m "adding counts file"
+git push origin main
+```
+
+# Use "counts.txt" file to make volcano plot
+- This is the RStudio script to run to make your volcano plot
+```
+# Load necessary libraries
+if (!requireNamespace("DESeq2", quietly = TRUE)) install.packages("BiocManager"); BiocManager::install("DESeq2")
+if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2")
+
+library(DESeq2)
+library(ggplot2)
+
+# Load counts
+counts <- read.delim("counts.txt", comment.char = "#", stringsAsFactors = FALSE)
+rownames(counts) <- counts$Geneid
+counts <- counts[, grep("^SRR", colnames(counts))]
+
+# Sample metadata
+condition <- factor(c(rep("Healthy", 4), rep("Alzheimer", 4)))
+coldata <- data.frame(row.names = colnames(counts), condition)
+
+# DESeq2 analysis
+dds <- DESeqDataSetFromMatrix(countData = counts,
+                              colData = coldata,
+                              design = ~ condition)
+
+dds <- DESeq(dds)
+res <- results(dds)
+
+# Add column for significance
+res$padj[is.na(res$padj)] <- 1
+res$sig <- ifelse(res$padj < 0.05 & res$log2FoldChange > 1, "Up",
+           ifelse(res$padj < 0.05 & res$log2FoldChange < -1, "Down", "NotSig"))
 
 
+# Volcano plot
+ggplot(as.data.frame(res), aes(x = log2FoldChange, y = -log10(padj))) +
+  geom_point(aes(color = sig), alpha = 0.6) +
+  scale_color_manual(values = c("Up" = "red", "Down" = "blue", "NotSig" = "gray")) +
+  labs(title = "Volcano Plot: Alzheimer vs Healthy",
+       x = "Log2 Fold Change", y = "-Log10 Adjusted P-Value") +
+  theme_minimal()
+
+```
    
