@@ -41,6 +41,7 @@ wget https://ftp.ensembl.org/pub/release-113/fasta/homo_sapiens/dna/Homo_sapiens
 
 
 # Unzip the file
+
 '''
 gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 '''
